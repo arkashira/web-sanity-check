@@ -1,16 +1,7 @@
-# WebGuard
-WebGuard is a test execution framework that can execute UI and API tests in parallel.
+# Web Sanity Check
 
-## Features
-* Execute UI and API tests in parallel
-* Reduce test execution time
-* Handle large test suites with thousands of tests
-
-## Requirements
-* Python 3.8 or later
-
-## Installation
-* Install using pip: `pip install .`
+A tool to generate a `.gitlab-ci.yml` snippet for web-sanity-check.
 
 ## Usage
-* Run tests using pytest: `pytest`
+
+To generate a `.gitlab-ci.yml` snippet, run the following command:
