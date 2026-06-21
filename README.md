@@ -1,7 +1,11 @@
-# Web Sanity Check
+# Test Generator
 
-A tool to generate a `.gitlab-ci.yml` snippet for web-sanity-check.
+This project generates tests from recorded user flows.
 
 ## Usage
 
-To generate a `.gitlab-ci.yml` snippet, run the following command:
+1. Create a list of user flows.
+2. Use the `generate_tests` function to generate tests from the user flows.
+3. Use the `calculate_coverage` function to calculate test coverage.
+
+## Example
