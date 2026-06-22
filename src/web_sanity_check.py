@@ -1,32 +1,36 @@
 import json
 from dataclasses import dataclass
-from argparse import ArgumentParser
+from typing import List
 
 @dataclass
-class WebSanityCheckConfig:
-    test_directory: str
+class UserFlow:
+    steps: List[str]
 
-def generate_gitlab_ci_yaml(config: WebSanityCheckConfig) -> str:
-    yaml_template = """
-stages:
-  - test
+class WebSanityCheck:
+    def __init__(self):
+        self.recorded_flows = []
 
-web-sanity-check:
-  stage: test
-  image: docker:latest
-  script:
-    - docker pull web-sanity-check
-    - docker run -t web-sanity-check wsc run {test_directory}
-  allow_failure: false
-"""
-    return yaml_template.format(test_directory=config.test_directory)
+    def record_user_flow(self, flow: UserFlow):
+        self.recorded_flows.append(flow)
 
-def main():
-    parser = ArgumentParser(description="Generate .gitlab-ci.yml snippet for web-sanity-check")
-    parser.add_argument("--test-directory", help="Custom test directory", default="tests")
-    args = parser.parse_args()
-    config = WebSanityCheckConfig(test_directory=args.test_directory)
-    print(generate_gitlab_ci_yaml(config))
+    def generate_tests(self):
+        tests = []
+        for flow in self.recorded_flows:
+            test = self._generate_test(flow)
+            tests.append(test)
+        return tests
 
-if __name__ == "__main__":
-    main()
+    def _generate_test(self, flow: UserFlow):
+        test = []
+        for step in flow.steps:
+            test.append(f"assert {step} == '{step}'")
+        return "\n".join(test)
+
+    def save_recorded_flows(self, filename: str):
+        with open(filename, 'w') as f:
+            json.dump([flow.__dict__ for flow in self.recorded_flows], f)
+
+    def load_recorded_flows(self, filename: str):
+        with open(filename, 'r') as f:
+            flows = json.load(f)
+            self.recorded_flows = [UserFlow(**flow) for flow in flows]
