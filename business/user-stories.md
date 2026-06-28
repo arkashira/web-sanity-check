@@ -1,0 +1,29 @@
+## `user-stories.md`
+
+### Epic 1 – **Test Definition & Management**
+| # | User Story (Connextra) | Acceptance Criteria | Complexity |
+|---|------------------------|---------------------|------------|
+| 1 | **As a QA Engineer, I want to create reusable test suites from a visual UI, so that I can quickly assemble regression packs without writing code.** | - Drag‑and‑drop UI to add test steps.<br>- Save suite as JSON/YAML for version control.<br>- Clone, rename, or delete existing suites.<br>- Export suite to CI pipelines (GitHub Actions, GitLab CI).<br>- Suites are searchable by tags & description. | **M** |
+| 2 | **As a DevOps Lead, I want to schedule automated runs of selected suites on a configurable cadence, so that my team gets continuous confidence in production readiness.** | - Cron‑style scheduler with timezone support.<br>- Ability to select multiple environments (dev, staging, prod).<br>- Email/Slack webhook notifications on pass/fail.<br>- Run history retained for 90 days with drill‑down logs.<br>- Override schedule per suite for ad‑hoc runs. | **M** |
+| 3 | **As a Product Manager, I want to tag test cases with business impact levels (Critical, High, Medium, Low), so that stakeholders can prioritize remediation.** | - Tag selector on each test case.<br>- Dashboard view summarizing failures by impact level.<br>- Filterable reports (PDF/HTML) by impact.<br>- Impact tags propagate to CI alerts (e.g., fail build on Critical).<br>- Bulk edit of tags across suites. | **S** |
+| 4 | **As a Security Analyst, I want to embed security‑focused checks (e.g., CSP, X‑Frame‑Options) into any suite, so that compliance is validated alongside functional tests.** | - Library of pre‑built security checks.<br>- Ability to add custom header checks via simple DSL.<br>- Results flagged separately from functional failures.<br>- Exportable compliance report (PCI‑DSS, OWASP ASVS).<br>- Integration with existing security ticketing (Jira, ServiceNow). | **L** |
+
+### Epic 2 – **Scalable Execution Engine**
+| # | User Story (Connextra) | Acceptance Criteria | Complexity |
+|---|------------------------|---------------------|------------|
+| 5 | **As a Site Reliability Engineer, I want the test runner to execute tests in parallel across a configurable worker pool, so that large suites finish within minutes.** | - Configurable worker count (1‑64) per run.<br>- Auto‑scaling of workers in Kubernetes/ECS based on queue depth.<br>- Guarantees order for dependent steps via DAG.<br>- Real‑time progress bar with per‑worker status.<br>- Graceful fallback to sequential mode on resource limits. | **L** |
+| 6 | **As a Front‑End Engineer, I want to run tests against multiple browsers and device emulations in a single suite, so that cross‑compatibility is verified automatically.** | - Built‑in support for Chrome, Firefox, Edge, Safari (via Playwright).<br>- Device profiles (iPhone 14, Pixel 7, iPad, desktop).<br>- Results aggregated per browser/device.<br>- Screenshot diff view for visual regressions.<br>- Option to run headless or headed for debugging. | **L** |
+| 7 | **As a Cloud Cost Manager, I want usage‑based billing metrics exposed per project, so that I can track spend on test execution.** | - Dashboard showing CPU‑seconds, memory‑GB‑hours per project.<br>- Exportable CSV for finance.<br>- Alert when projected monthly cost exceeds threshold.<br>- Ability to set per‑project quota limits.<br>- Integration with cloud provider cost APIs (AWS, GCP, Azure). | **M** |
+
+### Epic 3 – **Result Analysis & Reporting**
+| # | User Story (Connextra) | Acceptance Criteria | Complexity |
+|---|------------------------|---------------------|------------|
+| 8 | **As a Developer, I want a detailed step‑by‑step log with request/response payloads, so that I can debug failing tests quickly.** | - Log view per test step with collapsible sections.<br>- Ability to download raw HAR files.<br>- Highlighted diff for expected vs actual JSON bodies.<br>- Search within logs (regex, keyword).<br>- Link to source code line if test is code‑based. | **M** |
+| 9 | **As a Team Lead, I want a trend chart of pass/fail rates over time per suite, so that I can spot regressions early.** | - Line chart showing daily pass %, fail % for each suite.<br>- Ability to overlay CI build numbers.<br>- Exportable PNG/CSV.<br>- Filter by environment, browser, impact tag.<br>- Alert on >10 % drop week‑over‑week. | **S** |
+| 10 | **As a Compliance Officer, I want automated compliance reports that map test results to regulatory controls, so that audit evidence is generated automatically.** | - Mapping matrix (e.g., SOC 2, ISO 27001) to test cases.<br>- One‑click PDF/HTML report with pass/fail per control.<br>- Digital signature support for audit trails.<br>- Export to SharePoint/Confluence.<br>- Versioned report archive. | **M** |
+| 11 | **As a Customer Success Manager, I want to share a read‑only results portal with external stakeholders, so that they can view test outcomes without accessing internal systems.** | - Public‑share link with expiration (7‑30 days).<br>- Role‑based view: summary only vs full logs.<br>- Branding customization (logo, colors).<br>- Single sign‑on via SAML/OIDC optional.<br>- Usage analytics (views, downloads). | **S** |
+| 12 | **As a QA Manager, I want to bulk import existing test definitions from CSV/Excel, so that legacy suites can be migrated quickly.** | - Import wizard supporting CSV/Excel with column mapping.<br>- Validation of required fields (URL, method, expected status).<br>- Preview of import with error highlighting.<br>- Rollback option if import fails.<br>- Audit log of import actions. | **M** |
+
+---  
+
+*Legend:* **S** = Small (≈ 2 person‑days), **M** = Medium (≈ 5 person‑days), **L** = Large (≈ 10 person‑days).
